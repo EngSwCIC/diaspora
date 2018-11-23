@@ -98,6 +98,8 @@ class Person < ApplicationRecord
       .where(:posts => {:root_guid => StatusMessage.guids_for_author(user.person), :type => 'Reshare'} )
   }
 
+
+
   # This scope selects people where the full name contains the search_str or diaspora ID
   # starts with the search_str.
   # However, if the search_str doesn't have more than 1 non-whitespace character, it'll return an empty set.
