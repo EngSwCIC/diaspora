@@ -10,7 +10,7 @@ gem "responders", "2.4.0"
 
 # Appserver
 
-gem "unicorn", "5.4.1", require: false
+gem "unicorn", "5.4.0", require: false
 gem "unicorn-worker-killer", "0.4.4"
 
 # Federation
@@ -83,7 +83,7 @@ gem "fog-aws",     "3.3.0"
 gem "mini_magick", "4.9.2"
 
 # GUID generation
-gem "uuid", "2.3.9"
+gem "uuid", "2.3.8"
 
 # Icons
 
@@ -115,7 +115,7 @@ source "https://rails-assets.org" do
   gem "rails-assets-corejs-typeahead",                    "1.2.1"
   gem "rails-assets-cropperjs",                           "1.4.3"
   gem "rails-assets-fine-uploader",                       "5.13.0"
-  gem "rails-assets-pica",                                "5.0.0"
+  gem "rails-assets-pica",                                "4.0.1"
 
   # jQuery plugins
 
@@ -124,7 +124,7 @@ source "https://rails-assets.org" do
   gem "rails-assets-jquery.are-you-sure",                 "1.9.0"
   gem "rails-assets-jquery-placeholder",                  "2.3.1"
   gem "rails-assets-jquery-textchange",                   "0.2.3"
-  gem "rails-assets-utatti-perfect-scrollbar",            "1.4.0"
+  gem "rails-assets-utatti-perfect-scrollbar",            "1.3.0"
 end
 
 gem "markdown-it-html5-embed", "1.0.0"
@@ -144,7 +144,7 @@ gem "leaflet-rails",       "1.3.1"
 
 # Parsing
 
-gem "nokogiri",          "1.8.5"
+gem "nokogiri",          "1.8.2"
 gem "open_graph_reader", "0.6.2" # also update User-Agent in features/support/webmock.rb
 gem "redcarpet",         "3.4.0"
 gem "ruby-oembed",       "0.12.0"
@@ -307,7 +307,7 @@ end
 
 group :development, :test do
   # RSpec (unit tests, some integration tests)
-  gem "rspec-rails", "3.8.1"
+  gem "rspec-rails"
 
   # Cucumber (integration tests)
   gem "cucumber-rails", "1.6.0", require: false
