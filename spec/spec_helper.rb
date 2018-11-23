@@ -13,6 +13,7 @@ require File.join(File.dirname(__FILE__), "..", "config", "environment")
 require Rails.root.join("spec", "helper_methods")
 require "rspec/rails"
 require "webmock/rspec"
+require "pry"
 require "factory_girl"
 require "sidekiq/testing"
 require "shoulda/matchers"
