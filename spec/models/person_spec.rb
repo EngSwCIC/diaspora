@@ -11,7 +11,7 @@ describe Person, :type => :model do
   end
 
   context 'scopes' do
-    describe 'functional tests - ALEX NASCIMENTO SOUZA 15/0115474'
+    describe 'functional tests - ALEX NASCIMENTO SOUZA 15/0115474' do
       describe '.find_by_substring' do
         it 'returns none when substring is smaller than 2' do
           expect(Person.find_by_substring("a")).to eq(Person.none)
@@ -26,7 +26,9 @@ describe Person, :type => :model do
         end
       end
     end
-  
+  end
+
+
   it 'always has a profile' do
     expect(Person.new.profile).not_to be_nil
   end
