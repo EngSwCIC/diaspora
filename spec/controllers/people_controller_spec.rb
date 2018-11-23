@@ -13,6 +13,27 @@ describe PeopleController, :type => :controller do
     sign_in @user, scope: :user
   end
 
+  context "PeopleController" do
+    describe "GET/index generate JSON - ALEX NASCIMENTO SOUZA - 15/0115474" do
+      before do
+        get :index, params: {limit: 1, term: @user.name}, format: :json
+      end
+
+      it "generates a JSON" do
+        expect(response.header['Content-Type']).to include 'application/json'
+      end
+
+      it "initialize aspect" do
+        expect(assigns(:aspect)).to be :search
+      end
+
+      it "initialize aspect" do
+        expect(assigns(:people)).not_to be_nil
+      end
+    end
+  end
+
+
   describe '#index (search)' do
     before do
       @eugene = FactoryGirl.create(
