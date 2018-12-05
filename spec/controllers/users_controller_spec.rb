@@ -46,6 +46,20 @@ describe UsersController, :type => :controller do
       get :download_photos
       expect(response).to redirect_to(@user.exported_photos_file.url)
     end
+
+    # Teste Estrutural Nicholas
+
+    it "redirect to different routes in export" do
+      @user.perform_export
+      get :download_photos
+      expect(response).to redirect_to(@user.export_in_progress.url)
+    end
+
+    it "redirect to different routes in exporting photos" do
+      @user.perform_export_photos
+      get :download_photos
+      expect(response).to redirect_to(@user.export_in_progress.url)
+    end
   end
 
   describe '#public' do

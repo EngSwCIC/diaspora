@@ -45,6 +45,15 @@ describe User, :type => :model do
         user.reload.encryption_key
       }.to_not raise_error
     end
+
+    # Teste Funcional Nicholas
+    it 'has the same value as the generated key when returning' do
+      user = User.build(:username => 'max', :email => 'foo@bar.com', :password => 'password', :password_confirmation => 'password')
+
+      user.save!
+      expect(user.serialized_private_key).to be_present
+      expect(user.serialized_private_key).to be_valid
+    end
   end
 
   describe 'yearly_actives' do
