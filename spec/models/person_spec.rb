@@ -26,6 +26,31 @@ describe Person, :type => :model do
         end
       end
     end
+
+    describe 'functional tests - RENAN ROCHA REBOREDO 13/0131865' do
+
+      before :each do
+        @post = FactoryGirl.create(:post, public: true)
+      end
+
+      describe '.allowed_to_be_mentioned_in_a_comment_to' do
+
+        it 'allows all person to be mentioned in a public post' do
+          expect(Person.allowed_to_be_mentioned_in_a_comment_to(@post)).to include(@person)
+        end
+
+        it 'dont allow random person to be mentioned in a not public post' do
+          @post.update(public: false)
+          expect(Person.allowed_to_be_mentioned_in_a_comment_to(@post)).not_to include(@person)
+        end
+
+        it 'allows person to be mentioned in a post from a known author' do
+          @post.update(public: false, author: @person)
+          expect(Person.allowed_to_be_mentioned_in_a_comment_to(@post)).to include(@person)
+        end
+
+      end
+    end
   end
 
 
