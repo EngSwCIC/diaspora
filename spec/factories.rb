@@ -188,6 +188,11 @@ FactoryGirl.define do
     after(:build) {|p| p.poll = p.poll_answer.poll }
   end
 
+  factory :post do
+    association :author, factory: :person
+    type "Tipo"
+  end
+
   factory(:photo) do
     sequence(:random_string) {|n| SecureRandom.hex(10) }
     association :author, :factory => :person
