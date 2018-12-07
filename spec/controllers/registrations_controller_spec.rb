@@ -85,6 +85,19 @@ describe RegistrationsController, type: :controller do
         }.to change(User, :count).by(1)
       end
 
+      # Functional tests Tiago
+
+      it "does not create a user because it already exists" do
+        get :create, params: valid_params
+        expect { get :create, params: valid_params }.not_to change(User, :count)
+      end
+
+      it "sets the flash error with user that already exists" do
+        get :create, params: valid_params
+        get :create, params: valid_params
+        expect(flash[:error]).to be_nil
+      end
+
       it "assigns @user" do
         get :create, params: valid_params
         expect(assigns(:user)).to be_truthy

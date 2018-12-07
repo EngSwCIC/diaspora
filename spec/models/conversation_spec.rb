@@ -26,6 +26,14 @@ describe Conversation, :type => :model do
     expect { conversation }.to change(Message, :count).by(1)
   end
 
+  describe "functional tests - TIAGO RODRIGUES DA CUNHA CABRAL 150150296" do
+    describe "#participant_handles" do
+      it "returns conversation participants formated" do
+        expect(conversation.participant_handles).to eq("bob@localhost:9887;alice@localhost:9887")
+      end
+    end
+  end
+
   describe "#last_author" do
     it "returns the last author to a conversation" do
       message_last
