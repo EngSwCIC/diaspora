@@ -31,6 +31,28 @@ describe PeopleController, :type => :controller do
         expect(assigns(:people)).not_to be_nil
       end
     end
+
+    describe "GET/refresh search - RENAN ROCHA REBOREDO - 13/0131865" do
+      before do
+        get :refresh_search, format: :json
+      end
+
+      it "generates a JSON" do
+        expect(response.header['Content-Type']).to include 'application/json'
+      end
+
+      it "initialize aspect" do
+        expect(assigns(:aspect)).to be :search
+      end
+
+      it "initialize aspect" do
+        expect(assigns(:people)).not_to be_nil
+      end
+
+      it "generates new html answer" do
+        expect(assigns(:answer_html)).not_to be_nil
+      end
+    end
   end
 
 
