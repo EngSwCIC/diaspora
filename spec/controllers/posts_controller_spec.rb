@@ -12,15 +12,14 @@ describe PostsController, type: :controller do
     describe "GET/show generate JSON - TIAGO RODRIGUES DA CUNHA CABRAL - 15/0150296" do
       before do
         sign_in alice, scope: :user
+        get :show, params: {id: post.id}, format: :json
       end
 
       it "generates a JSON" do
-        get :show, params: {id: post.id}, format: :json
         expect(response.header['Content-Type']).to include 'application/json'
       end
 
       it "expect JSON response to not be empty" do
-        get :show, params: {id: post.id}, format: :json
         expect(response.body).not_to be_nil
       end
 
