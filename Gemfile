@@ -7,7 +7,7 @@ gem "rails", "5.1.6"
 # Legacy Rails features, remove me!
 # responders (class level)
 gem "responders", "2.4.0"
-
+gem "pg",     "1.1.3"
 # Appserver
 
 gem "unicorn", "5.4.0", require: false
