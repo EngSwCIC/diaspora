@@ -8,6 +8,28 @@ describe PostsController, type: :controller do
   let(:post) { alice.post(:status_message, text: "ohai", to: alice.aspects.first) }
   let(:post_service) { controller.send(:post_service) }
 
+  context "PostsController" do
+    describe "GET/show generate JSON - TIAGO RODRIGUES DA CUNHA CABRAL - 15/0150296" do
+      before do
+        sign_in alice, scope: :user
+      end
+
+      it "generates a JSON" do
+        get :show, params: {id: post.id}, format: :json
+        expect(response.header['Content-Type']).to include 'application/json'
+      end
+
+      it "expect JSON response to not be empty" do
+        get :show, params: {id: post.id}, format: :json
+        expect(response.body).not_to be_nil
+      end
+
+      it "response status of valid request to 200" do
+        expect(response.status).to be(200)
+      end
+    end
+  end
+
   describe "#show" do
     context "user signed in" do
       context "given a post that the user is allowed to see" do
