@@ -8,9 +8,65 @@ describe TagsController, :type => :controller do
   describe '#index (search)' do
     before do
       sign_in alice, scope: :user
-      bob.profile.tag_string = "#cats #diaspora #rad"
+      bob.profile.tag_string = "#cats #diaspora #rad #ts #tspeaker #transform #phone #ipod"
       bob.profile.build_tags
       bob.profile.save!
+    end
+
+    context "TagsController" do
+      describe "GET/index - ALEX NASCIMENTO SOUZA - 15/0115474" do
+        describe "when param q is empty - Structural " do
+  
+          it "responds w/ unprocessable entity" do
+            get :index, format: :json
+            expect(response).to have_http_status(422)
+          end
+
+          it "responds w/ a redirection" do
+            get :index, format: :html
+            expect(response).to redirect_to tag_path("partytimeexcellent")
+          end
+        end
+
+        describe "when param q is not empty - Functional" do
+          before do
+            get :index, params: {q: "ts"}, format: :json
+          end
+          it "responds w/ success http status" do
+            expect(response).to have_http_status(200)
+          end
+
+          it "returns a non-empty json" do
+            expect(response.body).to include("#ts")
+          end
+        end
+
+        describe "when param q is not empty - Structural" do
+          describe "when limit is equal 2" do
+            before do
+              get :index, params: {q: "ts", limit: 2}, format: :json
+            end
+            it "assings an instance variable @tags" do
+              expect(assigns(:tags)).not_to be_nil
+            end
+
+            it "returns assigns one tag because of limit param" do
+              expect(assigns(:tags).length).to eq 1
+            end
+          end
+          describe "when limit is blank" do
+            before do
+              get :index, params: {q: "ts"}, format: :json
+            end
+
+            it "returns assigns one tag because of limit param" do
+              expect(assigns(:tags).length).to eq 2
+            end
+          end
+        end
+
+
+      end
     end
 
     it 'responds with json' do
