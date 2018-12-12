@@ -10,6 +10,26 @@ describe ContactsController, :type => :controller do
     allow(@controller).to receive(:current_user).and_return(bob)
   end
 
+  context "ContactsController" do
+    describe "GET/index - ALEX NASCIMENTO SOUZA - 15/0115474 - Structural" do
+      before do
+        get :index, params: {}, format: :html
+      end
+
+      it "doesnt assign an aspect" do
+        expect(assigns(:aspect)).to be_nil
+      end
+
+      it "doesnt assign a contact size" do
+        expect(assigns(:contact)).to be_nil
+      end
+
+    end
+  end
+
+
+
+
   describe '#index' do
     context 'format mobile' do
       it "succeeds" do
