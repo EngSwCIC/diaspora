@@ -13,6 +13,27 @@ describe PhotosController, :type => :controller do
     request.env["HTTP_REFERER"] = ''
   end
 
+  describe 'testes estruturais - RAFAEL ALVES FERNANDES 14/0030395' do
+    describe 'GET/index' do
+      before do
+        get :index, params: { person_id: alice.guid }
+        sign_in alice, scope: :user
+      end
+
+      it 'initialize post_types' do
+        expect(assigns(:post_type)).to be :photos
+      end
+
+      it 'set person' do
+        expect(assigns[:person]).to eq(alice.person)
+      end
+
+      it 'set posts' do
+        expect(assigns[:posts]).not_to be_nil
+      end
+    end
+  end
+
   describe '#create' do
     before do
       @params = {
