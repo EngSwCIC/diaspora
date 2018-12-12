@@ -10,6 +10,41 @@ describe Person, :type => :model do
     @person = FactoryGirl.create(:person)
   end
 
+  describe 'testes funcionais - RAFAEL ALVES FERNANDES 14/0030395' do
+    describe '.find_from_guid_or_username' do
+      it 'retrieves a person if id is passed as param' do
+        person = Person.find_from_guid_or_username(id: @person.guid)
+
+        expect(person).to eq(@person)
+      end
+
+      it 'retrieves a user if username is passed as param' do
+        user = Person.find_from_guid_or_username(username: @user.username)
+
+        expect(user).to eq(@user.person)
+      end
+
+      it 'throw exception if neither id or username is passed' do
+        expect{
+          Person.find_from_guid_or_username(id: nil)
+        }.to raise_error ActiveRecord::RecordNotFound
+      end
+
+      it 'throw exception if user doesnt exists' do
+        expect{
+          Person.find_from_guid_or_username(id: '21871788173')
+        }.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+
+    describe '#lock_access!' do
+      it 'lock person access' do
+        @person.lock_access!
+        expect(@person.reload.closed_account).to be true
+      end
+    end
+  end
+
   context 'scopes' do
     describe 'functional tests - ALEX NASCIMENTO SOUZA 15/0115474'
       describe '.find_by_substring' do

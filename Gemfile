@@ -10,6 +10,8 @@ gem "responders", "2.4.0"
 
 # Appserver
 
+gem "pg",     "1.0.0"
+
 gem "unicorn", "5.4.0", require: false
 gem "unicorn-worker-killer", "0.4.4"
 
