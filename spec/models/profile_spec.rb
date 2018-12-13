@@ -5,6 +5,41 @@
 #   the COPYRIGHT file.
 
 describe Profile, :type => :model do
+
+  describe 'testes funcionais - RAFAEL ALVES FERNANDES 14/0030395' do
+    describe '#date=' do
+      let(:profile) do
+        profile = FactoryGirl.build(:person).profile
+      end
+
+      it 'sets birthday to nil if params is blank' do
+        profile.date=({ 'day' => '', 'month' => '', 'year' => '' })
+
+        expect(profile.birthday).to be_nil
+      end
+
+      it 'birthday is today with invalid day' do
+        profile.date=({ 'day' => '35', 'month' => '1', 'year' => '2010' })
+
+        expect(profile.birthday).to eq(Date.today)
+      end
+
+      it 'birthday is nil with invalid month' do
+        profile.date=({ 'day' => '15', 'month' => '15', 'year' => '2010' })
+
+        expect(profile.birthday).to eq(Date.today)
+      end
+
+      it 'sets birthday correctly' do
+        profile.date=({ 'day' => '15', 'month' => '1', 'year' => '1996' })
+
+        expect(profile.birthday.day).to eq(15)
+        expect(profile.birthday.month).to eq(1)
+        expect(profile.birthday.year).to eq(1996)
+      end
+    end
+  end
+
   describe 'validation' do
     describe "of first_name" do
       it "strips leading and trailing whitespace" do
