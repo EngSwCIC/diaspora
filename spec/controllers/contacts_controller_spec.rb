@@ -5,9 +5,11 @@
 #   the COPYRIGHT file.
 
 describe ContactsController, :type => :controller do
+  let(:people) { FactoryGirl.create_list(:person, 2) }
   before do
     sign_in bob, scope: :user
     allow(@controller).to receive(:current_user).and_return(bob)
+    allow(Person).to receive(:community_spotlight).and_return(people)
   end
 
   context "ContactsController" do
@@ -21,15 +23,24 @@ describe ContactsController, :type => :controller do
       end
 
       it "doesnt assign a contact size" do
-        expect(assigns(:contact)).to be_nil
+        expect(assigns(:contact_size)).to be_nil
+      end
+    end
+
+    describe "GET/spotlight - ALEX NASCIMENTO SOUZA - 15/0115474 - Functional" do
+      before do
+        get :spotlight, params: {}
       end
 
+      it "assigns spotlight" do
+        expect(assigns(:spotlight)).to be true
+      end
+
+      it "assigns people" do
+        expect(assigns(:people)).to be_an_instance_of Array
+      end
     end
   end
-
-
-
-
   describe '#index' do
     context 'format mobile' do
       it "succeeds" do
