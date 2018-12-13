@@ -5,8 +5,28 @@
 #   the COPYRIGHT file.
 
 describe ProfilesController, :type => :controller do
+  let(:new_user) { FactoryGirl.create(:user) }
+  let!(:new_person) { FactoryGirl.create(:person, guid: 1) }
   before do
-    sign_in eve, scope: :user
+    sign_in new_user, scope: :user
+  end
+
+  describe "GET/show - ALEX NASCIMENTO SOUZA - 15/0115474" do
+    before do
+      get :show, params: {id: 1}, format: :json
+    end
+
+    it "assigns a person - Structural" do
+      expect(assigns(:person)).to eq new_person
+    end
+
+    it "renders a non-empty json - Functional" do
+      expect(response.body).not_to be_nil
+    end
+
+    it "renders a json with person data - Functional" do
+      expect(response.body).to include("#{new_person.name}")
+    end
   end
 
   describe '#show' do
