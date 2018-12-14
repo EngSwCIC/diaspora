@@ -5,6 +5,54 @@
 #   the COPYRIGHT file.
 
 describe User, :type => :model do
+  describe 'testes funcionais - RAFAEL ALVES FERNANDES 14/0030395' do
+    describe '#setup' do
+      let(:user) { FactoryGirl.create :user }
+
+      it 'assigns username' do
+        user.username = nil
+        user.setup(username: 'spnrafael')
+
+        expect(user.username).to eq('spnrafael')
+      end
+
+      it 'assigns email' do
+        user.email = nil
+        user.setup(email: 'spnrafael@gmail.com')
+
+        expect(user.email).to eq('spnrafael@gmail.com')
+      end
+
+      it 'assigns language' do
+        user.language = nil
+        user.setup(language: 'pt-BR')
+
+        expect(user.language).to eq('pt-BR')
+      end
+
+      it 'assigns default language' do
+        user.language = nil
+        user.setup(username: 'foo')
+        
+        expect(user.language).to eq('en')
+      end
+
+      it 'assigns color_theme' do
+        user.color_theme = nil
+        user.setup(color_theme: 'black')
+
+        expect(user.color_theme).to eq('black')
+      end
+
+      it 'assigns default color theme' do
+        user.color_theme = nil
+        user.setup(username: 'foo')
+        
+        expect(user.color_theme).to eq(AppConfig.settings.default_color_theme)
+      end
+    end
+  end
+
   context "relations" do
     context "#conversations" do
       it "doesn't find anything when there is nothing to find" do
